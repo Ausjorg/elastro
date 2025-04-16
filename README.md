@@ -128,23 +128,23 @@ elastic-cli search products "name:laptop" --format json
 
 ## Documentation
 
-For more detailed documentation, please refer to the [docs](./docs) directory:
+For more detailed documentation, please refer to the [docs](https://github.com/Fremen-Labs/elastro/tree/main/docs) directory:
 
-- [Getting Started](./docs/getting_started.md)
-- [API Reference](./docs/api_reference.md)
-- [CLI Usage](./docs/cli_usage.md)
-- [Advanced Features](./docs/advanced_features.md)
-- [Troubleshooting](./docs/troubleshooting.md)
+- [Getting Started](https://github.com/Fremen-Labs/elastro/blob/main/docs/getting_started.md)
+- [API Reference](https://github.com/Fremen-Labs/elastro/blob/main/docs/api_reference.md)
+- [CLI Usage](https://github.com/Fremen-Labs/elastro/blob/main/docs/cli_usage.md)
+- [Advanced Features](https://github.com/Fremen-Labs/elastro/blob/main/docs/advanced_features.md)
+- [Troubleshooting](https://github.com/Fremen-Labs/elastro/blob/main/docs/troubleshooting.md)
 
 ## Examples
 
-Check out the [examples](./examples) directory for more usage examples:
+Check out the [examples](https://github.com/Fremen-Labs/elastro/tree/main/examples) directory for more usage examples:
 
-- [Client Connection](./examples/client.py)
-- [Index Management](./examples/index_management.py)
-- [Document Operations](./examples/document_operations.py)
-- [Search Operations](./examples/search.py)
-- [Datastream Management](./examples/datastreams.py)
+- [Client Connection](https://github.com/Fremen-Labs/elastro/blob/main/examples/client.py)
+- [Index Management](https://github.com/Fremen-Labs/elastro/blob/main/examples/index_management.py)
+- [Document Operations](https://github.com/Fremen-Labs/elastro/blob/main/examples/document_operations.py)
+- [Search Operations](https://github.com/Fremen-Labs/elastro/blob/main/examples/search.py)
+- [Datastream Management](https://github.com/Fremen-Labs/elastro/blob/main/examples/datastreams.py)
 
 ## Contributing
 
