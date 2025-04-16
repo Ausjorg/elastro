@@ -19,7 +19,7 @@ pip install elastro
 Or install from source:
 
 ```bash
-git clone https://github.com/yourusername/elastro.git
+git clone https://github.com/Fremen-Labs/elastro.git
 cd elastro
 pip install -e .
 ```

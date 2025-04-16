@@ -307,7 +307,7 @@ logging.getLogger('elasticsearch').setLevel(logging.DEBUG)
 
 If you encounter issues not covered in this guide:
 
-1. Check the [GitHub issues](https://github.com/yourusername/elastic-module/issues) for similar problems
+1. Check the [GitHub issues](https://github.com/Fremen-Labs/elastro/issues) for similar problems
 2. Review the Elasticsearch documentation for specific error messages
 3. Enable debug logging and examine the logs
 4. Open a new issue with details about your environment, steps to reproduce, and error messages
