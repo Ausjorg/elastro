@@ -12,17 +12,16 @@ authors = [
     {name = "Austin Jorgensen"},
 ]
 urls = {Homepage = "https://github.com/Fremen-Labs", Repository = "https://github.com/Fremen-Labs/elastro"}
-license = {text = "MIT"}
+license = "MIT"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "Topic :: Database :: Database API",
+    "Topic :: Database",
 ]
 dependencies = [
     "elasticsearch>=8.18.0",
@@ -49,5 +48,21 @@ dev = [
 [project.scripts]
 elastic-cli = "elastro.cli.cli:main"
 
-[tool.setuptools]
-packages = ["elastro"] 
+[tool.setuptools.packages.find]
+include = ["elastro*"]
+exclude = ["tests*", "examples*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true 
