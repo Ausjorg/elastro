@@ -4,7 +4,7 @@ Elasticsearch Management Module.
 A module for managing Elasticsearch operations within a pipeline process.
 """
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 # Core component imports
 from elastro.core.client import ElasticsearchClient
