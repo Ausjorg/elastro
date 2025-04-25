@@ -159,8 +159,10 @@ class ElasticsearchClient:
         try:
             self._client = Elasticsearch(**client_params)
             # Verify connection by making a ping request
-            ping_result = self._client.ping()
-            if not ping_result:
+            # The _perform_request method can sometimes fail with a 400 error on root endpoint
+            # Use the info() endpoint instead which is more reliable
+            info_result = self._client.info()
+            if not info_result:
                 raise ConnectionError("Failed to connect to Elasticsearch")
             self._connected = True
         except ESConnectionError as e:
@@ -208,7 +210,9 @@ class ElasticsearchClient:
             return False
         
         try:
-            return self._client.ping()
+            # Use info() instead of ping() to reliably check connection
+            self._client.info()
+            return True
         except Exception:
             self._connected = False
             return False

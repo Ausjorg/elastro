@@ -37,18 +37,14 @@ def try_connection(hosts, verify=False, ssl_show_warn=False, username=None, pass
         # Create client
         es = Elasticsearch(**client_params)
         
-        # Attempt ping
-        print("Attempting ping...")
-        ping_result = es.ping()
-        print(f"Ping result: {ping_result}")
-        
-        # Get info if ping successful
-        if ping_result:
+        # Attempt info call instead of ping
+        print("Attempting connection...")
+        try:
             info = es.info()
             print(f"Connected to Elasticsearch {info['version']['number']}")
             return True
-        else:
-            print("Ping returned False")
+        except Exception as e:
+            print(f"Connection error: {type(e).__name__}: {str(e)}")
             return False
             
     except Exception as e:

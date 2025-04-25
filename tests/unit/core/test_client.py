@@ -114,7 +114,7 @@ class TestElasticsearchClient:
         """Test successful connection to Elasticsearch."""
         with patch('elastro.core.client.Elasticsearch') as mock_es_class:
             mock_instance = MagicMock()
-            mock_instance.ping.return_value = True
+            mock_instance.info.return_value = {"version": {"number": "8.0.0"}}
             mock_es_class.return_value = mock_instance
             
             client = ElasticsearchClient(
@@ -140,7 +140,7 @@ class TestElasticsearchClient:
         """Test connection with API key authentication."""
         with patch('elastro.core.client.Elasticsearch') as mock_es_class:
             mock_instance = MagicMock()
-            mock_instance.ping.return_value = True
+            mock_instance.info.return_value = {"version": {"number": "8.0.0"}}
             mock_es_class.return_value = mock_instance
             
             client = ElasticsearchClient(
@@ -162,7 +162,7 @@ class TestElasticsearchClient:
              patch('urllib3.disable_warnings') as mock_disable_warnings:
             
             mock_instance = MagicMock()
-            mock_instance.ping.return_value = True
+            mock_instance.info.return_value = {"version": {"number": "8.0.0"}}
             mock_es_class.return_value = mock_instance
             
             client = ElasticsearchClient(
@@ -207,10 +207,10 @@ class TestElasticsearchClient:
         pytest.skip("Skipping authentication error test due to mocking complexity with Elasticsearch exceptions")
 
     def test_connect_ping_failure(self):
-        """Test handling of ping failure."""
+        """Test handling of info endpoint failure."""
         with patch('elastro.core.client.Elasticsearch') as mock_es_class:
             mock_instance = MagicMock()
-            mock_instance.ping.return_value = False
+            mock_instance.info.return_value = None
             mock_es_class.return_value = mock_instance
             
             client = ElasticsearchClient(
@@ -247,17 +247,17 @@ class TestElasticsearchClient:
         """Test is_connected with a client."""
         client = ElasticsearchClient(use_config=False)
         mock_client = MagicMock()
-        mock_client.ping.return_value = True
+        mock_client.info.return_value = {"version": {"number": "8.0.0"}}
         client._client = mock_client
+        client._connected = True
         
         assert client.is_connected() is True
-        mock_client.ping.assert_called_once()
 
     def test_is_connected_with_exception(self):
-        """Test is_connected when ping raises an exception."""
+        """Test is_connected when an exception occurs."""
         client = ElasticsearchClient(use_config=False)
         mock_client = MagicMock()
-        mock_client.ping.side_effect = Exception("Connection error")
+        mock_client.info.side_effect = Exception("Connection failure")
         client._client = mock_client
         client._connected = True
         

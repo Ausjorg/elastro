@@ -61,10 +61,10 @@ def real_elasticsearch():
     
     # Check if Elasticsearch is available
     try:
-        if not client.ping():
-            pytest.skip("Elasticsearch server is not available")
-    except Exception as e:
-        pytest.skip(f"Elasticsearch server is not available: {str(e)}")
+        if not client.info():
+            pytest.skip("Elasticsearch not available")
+    except Exception:
+        pytest.skip("Elasticsearch not available")
         
     return client
 
