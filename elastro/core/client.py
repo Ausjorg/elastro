@@ -35,7 +35,6 @@ class ElasticsearchClient:
         password: Optional[str] = None,
         api_key: Optional[str] = None,
         verify_certs: Optional[bool] = None,
-        headers: Optional[Dict[str, str]] = None,
         **kwargs
     ):
         """
@@ -52,7 +51,6 @@ class ElasticsearchClient:
             password: Elasticsearch password (alternative to auth)
             api_key: Elasticsearch API key (alternative to auth)
             verify_certs: Whether to verify SSL certificates
-            headers: Custom HTTP headers to send with each request
             **kwargs: Additional parameters to pass to the Elasticsearch client
         """
         if use_config:
@@ -67,7 +65,6 @@ class ElasticsearchClient:
             self.retry_on_timeout = retry_on_timeout if retry_on_timeout is not None else es_config.get("retry_on_timeout")
             self.max_retries = max_retries if max_retries is not None else es_config.get("max_retries")
             self.verify_certs = verify_certs if verify_certs is not None else es_config.get("verify_certs", True)
-            self.headers = headers or es_config.get("headers") or {}
         else:
             # Use only explicitly provided parameters
             self.hosts = hosts
@@ -76,7 +73,6 @@ class ElasticsearchClient:
             self.retry_on_timeout = retry_on_timeout
             self.max_retries = max_retries
             self.verify_certs = verify_certs if verify_certs is not None else True
-            self.headers = headers or {}
             
         # Handle direct username/password/api_key parameters
         if username and password:
@@ -146,19 +142,7 @@ class ElasticsearchClient:
             client_params["retry_on_timeout"] = self.retry_on_timeout
         if self.max_retries is not None:
             client_params["max_retries"] = self.max_retries
-        
-        # Add request timeout if specified
-        if self.timeout is not None:
-            client_params["request_timeout"] = self.timeout
-            
-        # Set headers with defaults first, then overwrite with user-provided headers
-        default_headers = {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        }
-        # Merge default headers with user-provided headers (user headers take precedence)
-        merged_headers = {**default_headers, **self.headers}
-        client_params["headers"] = merged_headers
+        # Note: timeout is handled in request_config in newer versions
 
         # Handle authentication
         if self.auth:
